@@ -1,0 +1,74 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing : border-box;
+}
+
+body{
+        font-family: "Manrope", sans-serif;
+        font-optical-sizing: auto;
+        background-color: rgb(217, 226, 236);
+        font-style: normal;
+      
+}
+
+h1{
+    font-size: 40px;
+    text-align: center;
+    color: rgb(56, 56,56);
+    padding: 20px;
+}
+
+#fecha{
+    text-align: center;
+    color: rgb(148, 148,148);
+    font-size: 30px;
+    font-weight: normal;
+}
+
+#contenedor{    
+width: 788px;
+background: white;
+padding: 20px;
+margin: auto;
+margin-top: 20px;
+}
+
+.accseso{
+    color: rgb(8, 89, 255);
+}
+
+.dni{
+ text-align: center;
+ font-size : 25px;   
+ margin-bottom: 20px;
+}
+
+input{
+    width: 100%;
+    padding: 48px;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.botones{
+    display: flex;
+
+}
+
+.entrada{
+    background: rgb(64, 13, 248);
+    width: 100%;
+    padding: 25px 35px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+.salida{
+    background: rgb(255, 0, 0);
+    width: 100%;
+    padding: 25px 35px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
