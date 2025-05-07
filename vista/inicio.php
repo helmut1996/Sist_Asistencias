@@ -69,9 +69,40 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo;");
       <td><?= $datos->nom_cargo ?></td>
       <td><?= $datos->entrada ?></td>
       <td><?= $datos->salida ?></td>
-      <td><a href="inicio.php?id=<?=$datos->id_asistencia?>" onclick = "advertencia(event) " class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
+      <td><a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_asistencia ?>"><i class="fa-solid fa-trash"></i></a>  </td>
     
     </tr>
+
+
+    <div class="modal fade" id="modalEliminar<?= $datos->id_asistencia ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_usuario ?>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_asistencia ?>">Confirmar eliminación</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       <p>¿Estás seguro de eliminar ?</p>
+        <p>¡No podrá recuperar este registro!'</P>
+      </div>
+
+      <div class="modal-footer">
+        <form method="POST" action="usuario.php">
+          <input type="hidden" name="eliminar_id" value="<?= $datos->id_asistencia ?>">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <a href="inicio.php?id=<?= $datos->id_asistencia ?>" class="btn btn-danger">Eliminar</a>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
     <?php } ?>
 
 

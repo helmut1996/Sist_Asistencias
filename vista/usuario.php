@@ -12,6 +12,12 @@
 </style>
 
 
+<script>
+function confirmDelete() {
+    return confirm('¿Está seguro de que desea eliminar este usuario?');
+}
+</script>
+
 <!-- primero se carga el topbar -->
 <?php require('./layout/topbar.php'); ?>
 <!-- luego se carga el sidebar -->
@@ -24,7 +30,7 @@
 
     <?php
     include "../modelo/conexion.php";
-    include "../controlador/controlador_eliminar_asistencia.php";
+    include "../controlador/controlador_eliminar_usuario.php";
     $sql = $conexion->query("SELECT * FROM usuario");
     ?>
 
@@ -52,10 +58,49 @@
       <td><?= $datos->apellido ?></td>
       <td><?= $datos->usuario ?></td>
       <td>
-        <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>"><i class="fa-solid fa-pen"></i></a>
-        <a href="inicio.php?id=<?=$datos->id_usuario?>" onclick = "advertencia(event) " class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
-    
+     <!-- Botón para abrir modal de edición -->
+     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>">
+    <i class="fa-solid fa-pen"></i>
+  </a>
+
+  <!-- Botón para abrir modal de eliminar -->
+  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_usuario ?>">
+  <i class="fa-solid fa-trash"></i>
+</a>   
+    </td>
+         
     </tr>
+
+
+
+
+    <div class="modal fade" id="modalEliminar<?= $datos->id_usuario ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_usuario ?>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_usuario ?>">Confirmar eliminación</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       <p>¿Estás seguro de eliminar ?</p>
+        <p>¡No podrá recuperar este registro!'</P>
+      </div>
+
+      <div class="modal-footer">
+        <form method="POST" action="usuario.php">
+          <input type="hidden" name="eliminar_id" value="<?= $datos->id_usuario ?>">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <a href="usuario.php?id=<?= $datos->id_usuario ?>" class="btn btn-danger">Eliminar</a>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 <!-- Modal -->
@@ -71,6 +116,9 @@
       <div class="modal-body">
         
       <form action="" method = "POST">
+            <div hidden class="fl-flex-label mb-4 px-2 col-12">
+                <input type="text" class="input input__text" placeholder="id" name="txtid" value = " <?= $datos->id_usuario ?>">
+            </div>
             <div class="fl-flex-label mb-4 px-2 col-12">
                 <input type="text" class="input input__text" placeholder="Nombre" name="txtnombre" value = " <?= $datos->nombre ?>">
             </div>
@@ -82,7 +130,7 @@
             </div>
             <div class="text-right p-4">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" value= "ok" name= "btnregistrar" class="btn btn-primary btn-rounded">Actualizar</button>
+                <button type="submit" value= "ok" name= "btnactualizar" class="btn btn-primary btn-rounded">Actualizar</button>
             </div>
 
         </form>
@@ -90,6 +138,8 @@
 
     </div>
   </div>
+
+
 </div>
 
 
