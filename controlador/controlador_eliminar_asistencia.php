@@ -21,10 +21,10 @@ if (isset($_GET['id'])) {
             $(function notificacion() {
                 new PNotify({
                     title: 'ERROR',
-                    text: 'No se ha eliminado la asistencia',
+                    text: 'Error al ingresar EL USUARIO',
                     type: 'error',
                     styling: 'bootstrap3',
-                    addclass: 'dark',
+                    addclass: 'dagger',
                     icon: 'fa fa-times',
                  
                 });

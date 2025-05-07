@@ -29,7 +29,7 @@
     ?>
 
 
-<a href="" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Usuario</a>
+<a href="registrar_usuarios.php" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Usuario</a>
 
 
     <table class="table table-bordered table-hover col-12" id = "example">
@@ -52,10 +52,50 @@
       <td><?= $datos->apellido ?></td>
       <td><?= $datos->usuario ?></td>
       <td>
-        <a href="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i></a>
-        <a href="inicio.php?id=<?=$datos->id_asistencia?>" onclick = "advertencia(event) " class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
+        <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>"><i class="fa-solid fa-pen"></i></a>
+        <a href="inicio.php?id=<?=$datos->id_usuario?>" onclick = "advertencia(event) " class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
     
     </tr>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal<?= $datos->id_usuario ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      <form action="" method = "POST">
+            <div class="fl-flex-label mb-4 px-2 col-12">
+                <input type="text" class="input input__text" placeholder="Nombre" name="txtnombre" value = " <?= $datos->nombre ?>">
+            </div>
+            <div class="fl-flex-label mb-4 px-2 col-12">
+                <input type="text" class="input input__text" placeholder="Apellido" name="txtapellido" value = "<?= $datos->apellido ?>">
+            </div>
+            <div class="fl-flex-label mb-4 px-2 col-12">
+                <input type="text" class="input input__text" placeholder="Usuarios" name="txtusuario" value = "<?= $datos->usuario ?>">
+            </div>
+            <div class="text-right p-4">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" value= "ok" name= "btnregistrar" class="btn btn-primary btn-rounded">Actualizar</button>
+            </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
     <?php } ?>
 
 
