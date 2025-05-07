@@ -91,11 +91,11 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo;");
       </div>
 
       <div class="modal-footer">
-        <form method="POST" action="usuario.php">
+
           <input type="hidden" name="eliminar_id" value="<?= $datos->id_asistencia ?>">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <a href="inicio.php?id=<?= $datos->id_asistencia ?>" class="btn btn-danger">Eliminar</a>
-        </form>
+    
       </div>
 
     </div>

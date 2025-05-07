@@ -9,7 +9,13 @@
                     </a>
                 </li>
 
-
+                <li class="red">
+                    <a href="empleado.php" class="activo">
+                        <img src="../public/img-inicio/team.png" class="img-inicio" alt="">
+                        <!-- <i class="fas fa-house-user"></i> -->
+                        <span class="lbl">EMPLEADOS</span>
+                    </a>
+                </li>
                 <li class="red">
                     <a href="usuario.php" class="activo">
                         <img src="../public/img-inicio/programar.png" class="img-inicio" alt="">
@@ -18,27 +24,7 @@
                     </a>
                 </li>
 
-                <li class="grey with-sub">
-                    <span>
-                        <img src="../public/img-inicio/programar.png" class="img-inicio" alt="">
-                        <!-- <i class="fas fa-sort-amount-up-alt"></i> -->
-                        <span class="lbl">CITAS</span>
-                    </span>
-                    <ul>
-                        <li>
-                            <a href="" class="">
-                                <i class="fas fa-plus-square icono-submenu"></i>
-                                <span class="lbl">Registrar cita</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="">
-                                <i class="fas fa-th-list icono-submenu"></i>
-                                <span class="lbl">Lista de citas</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
 
                 
 

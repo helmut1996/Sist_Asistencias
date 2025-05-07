@@ -6,17 +6,12 @@
 
 ?>
 <style> 
-  ul li:nth-child(3) .activo{
+  ul li:nth-child(2) .activo{
     background: rgb(11, 150, 214) !important;
   }
 </style>
 
 
-<script>
-function confirmDelete() {
-    return confirm('¿Está seguro de que desea eliminar este usuario?');
-}
-</script>
 
 <!-- primero se carga el topbar -->
 <?php require('./layout/topbar.php'); ?>
@@ -26,17 +21,24 @@ function confirmDelete() {
 <!-- inicio del contenido principal -->
 <div class="page-content">
 
-    <h4 class= "text-center text-secundary">USUARIOS</h4>
+    <h4 class= "text-center text-secundary">LISTA DE EMPLEADOS</h4>
 
     <?php
     include "../modelo/conexion.php";
-    include "../controlador/controlador_actualizar_usuario.php";
-    include "../controlador/controlador_eliminar_usuario.php";
-    $sql = $conexion->query("SELECT * FROM usuario");
+    include "../controlador/controlador_eliminar_empleados.php";
+    include "../controlador/controlador_actualizar_empleado.php";
+    $sql = $conexion->query("SELECT 
+
+empleado.id_empleado,
+empleado.nombre,
+empleado.apellido, 
+empleado.dni,
+cargo.nombre as 'nom_cargo' FROM empleado 
+INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
     ?>
 
 
-<a href="registrar_usuarios.php" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Usuario</a>
+<a href="registrar_empleado.php" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Empledo</a>
 
 
     <table class="table table-bordered table-hover col-12" id = "example">
@@ -45,7 +47,8 @@ function confirmDelete() {
       <th scope="col">ID</th>
       <th scope="col">NOMBRE</th>
       <th scope="col">APELLIDO</th>
-      <th scope="col">USUARIO</th>
+      <th scope="col">DNI</th>
+      <th scope="col">CARGO</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -54,18 +57,19 @@ function confirmDelete() {
   while($datos = $sql->fetch_object()){ ?>
 
 <tr>
-      <td><?= $datos->id_usuario ?></td>
+      <td><?= $datos->id_empleado ?></td>
       <td><?= $datos->nombre?></td>
       <td><?= $datos->apellido ?></td>
-      <td><?= $datos->usuario ?></td>
+      <td><?= $datos->dni ?></td>
+      <td><?= $datos->nom_cargo ?></td>
       <td>
      <!-- Botón para abrir modal de edición -->
-     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>">
+     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_empleado ?>">
     <i class="fa-solid fa-pen"></i>
   </a>
 
   <!-- Botón para abrir modal de eliminar -->
-  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_usuario ?>">
+  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_empleado ?>">
   <i class="fa-solid fa-trash"></i>
 </a>   
     </td>
@@ -75,12 +79,12 @@ function confirmDelete() {
 
 
 
-    <div class="modal fade" id="modalEliminar<?= $datos->id_usuario ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_usuario ?>" aria-hidden="true">
+    <div class="modal fade" id="modalEliminar<?= $datos->id_empleado ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_empleado ?>" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
       <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_usuario ?>">Confirmar eliminación</h5>
+        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_empleado ?>">Confirmar eliminación</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -92,11 +96,11 @@ function confirmDelete() {
       </div>
 
       <div class="modal-footer">
-        <form method="POST" action="usuario.php">
-          <input type="hidden" name="eliminar_id" value="<?= $datos->id_usuario ?>">
+    
+          <input type="hidden" name="eliminar_id" value="<?= $datos->id_empleado ?>">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <a href="usuario.php?id=<?= $datos->id_usuario ?>" class="btn btn-danger">Eliminar</a>
-        </form>
+          <a href="empleado.php?id=<?= $datos->id_empleado ?>" class="btn btn-danger">Eliminar</a>
+        
       </div>
 
     </div>
@@ -105,11 +109,11 @@ function confirmDelete() {
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal<?= $datos->id_usuario ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal<?= $datos->id_empleado ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar empleado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -118,7 +122,7 @@ function confirmDelete() {
         
       <form action="" method = "POST">
             <div hidden class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="id" name="txtid" value = " <?= $datos->id_usuario ?>">
+                <input type="text" class="input input__text" placeholder="id" name="txtid" value = " <?= $datos->id_empleado ?>">
             </div>
             <div class="fl-flex-label mb-4 px-2 col-12">
                 <input type="text" class="input input__text" placeholder="Nombre" name="txtnombre" value = " <?= $datos->nombre ?>">
@@ -127,8 +131,20 @@ function confirmDelete() {
                 <input type="text" class="input input__text" placeholder="Apellido" name="txtapellido" value = "<?= $datos->apellido ?>">
             </div>
             <div class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="Usuarios" name="txtusuario" value = "<?= $datos->usuario ?>">
+                <input type="text" class="input input__text" placeholder="Dni" name="txtdni" value = "<?= $datos->dni ?>">
             </div>
+
+            <div class="fl-flex-label mb-4 px-2 col-12">
+            <select name="txtcargo" class = "input input__select">
+            <?php
+                $sql2 = $conexion->query("SELECT * FROM cargo");
+                while($datos2 = $sql2->fetch_object()){ ?>
+                    <option value="<?= $datos2->id_cargo ?>"><?= $datos2->nombre ?></option>
+                <?php } ?>
+            </select>  
+            </div>
+
+
             <div class="text-right p-4">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="submit" value= "ok" name= "btnactualizar" class="btn btn-primary btn-rounded">Actualizar</button>

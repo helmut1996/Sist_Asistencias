@@ -1,13 +1,13 @@
 <?php
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = $conexion->query("DELETE FROM usuario WHERE id_usuario = $id");
+    $sql = $conexion->query("DELETE FROM empleado WHERE id_empleado = $id");
     if ($sql == true) { ?>
         <script>
             $(function notificacion() {
                 new PNotify({
                     title: 'CORRECTO',
-                    text: 'Se ha eliminado el usuario',
+                    text: 'Se ha eliminado el empleado',
                     type: 'success',
                     styling: 'bootstrap3',
                     addclass: 'dark',
@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
             $(function notificacion() {
                 new PNotify({
                     title: 'ERROR',
-                    text: 'Error al eliminar el usuario',
+                    text: 'Error al eliminar el empleado',
                     type: 'error',
                     styling: 'bootstrap3',
                     addclass: 'dagger',
