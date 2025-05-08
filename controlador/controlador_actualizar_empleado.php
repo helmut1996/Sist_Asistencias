@@ -26,7 +26,7 @@ if (!empty($_POST['btnactualizar'])) {
             </script>
         <?php } else {
             // Aquí puedes actualizar el usuario
-            $update = $conexion->query("UPDATE empleado SET nombre = '$nombre', apellido = '$apellido', dni = '$dni', cargo = '$cargo' WHERE id_empleado = '$id'");
+            $update = $conexion->query("UPDATE empleado SET nombre = '$nombre', apellido = '$apellido', dni = '$dni', cargo = $cargo WHERE id_empleado = '$id'");
 
             if ($update) { ?>
                 <script>

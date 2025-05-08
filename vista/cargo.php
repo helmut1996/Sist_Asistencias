@@ -6,7 +6,7 @@
 
 ?>
 <style> 
-  ul li:nth-child(2) .activo{
+  ul li:nth-child(3) .activo{
     background: rgb(11, 150, 214) !important;
   }
 </style>
@@ -21,25 +21,17 @@
 <!-- inicio del contenido principal -->
 <div class="page-content">
 
-    <h4 class= "text-center text-secundary">LISTA DE EMPLEADOS</h4>
+    <h4 class= "text-center text-secundary">LISTA DE CARGOS</h4>
 
     <?php
     include "../modelo/conexion.php";
-    include "../controlador/controlador_eliminar_empleados.php";
-    include "../controlador/controlador_actualizar_empleado.php";
-    $sql = $conexion->query("SELECT 
-
-empleado.id_empleado,
-empleado.nombre,
-empleado.apellido, 
-empleado.dni,
-empleado.cargo as 'id_cargo',
-cargo.nombre as 'nom_cargo' FROM empleado 
-INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
+    include "../controlador/controlador_eliminar_cargo.php";
+    include "../controlador/controlardor_actualizar_cargo.php";
+    $sql = $conexion->query("SELECT * FROM cargo");
     ?>
 
 
-<a href="registrar_empleado.php" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Empledo</a>
+<a href="registrar_cargo.php" class="btn btn-primary btn-rounded"><i class="fa-solid fa-plus"></i> Nuevo Cargo</a>
 
 
     <table class="table table-bordered table-hover col-12" id = "example">
@@ -47,9 +39,6 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
     <tr>
       <th scope="col">ID</th>
       <th scope="col">NOMBRE</th>
-      <th scope="col">APELLIDO</th>
-      <th scope="col">DNI</th>
-      <th scope="col">CARGO</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -58,19 +47,16 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
   while($datos = $sql->fetch_object()){ ?>
 
 <tr>
-      <td><?= $datos->id_empleado ?></td>
+      <td><?= $datos->id_cargo ?></td>
       <td><?= $datos->nombre?></td>
-      <td><?= $datos->apellido ?></td>
-      <td><?= $datos->dni ?></td>
-      <td><?= $datos->nom_cargo ?></td>
       <td>
      <!-- Botón para abrir modal de edición -->
-     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_empleado ?>">
+     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?= $datos->id_cargo ?>">
     <i class="fa-solid fa-pen"></i>
   </a>
 
   <!-- Botón para abrir modal de eliminar -->
-  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_empleado ?>">
+  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar<?= $datos->id_cargo ?>">
   <i class="fa-solid fa-trash"></i>
 </a>   
     </td>
@@ -80,12 +66,12 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
 
 
 
-    <div class="modal fade" id="modalEliminar<?= $datos->id_empleado ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_empleado ?>" aria-hidden="true">
+    <div class="modal fade" id="modalEliminar<?= $datos->id_cargo ?>" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel<?= $datos->id_cargo ?>" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
       <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_empleado ?>">Confirmar eliminación</h5>
+        <h5 class="modal-title" id="modalEliminarLabel<?= $datos->id_cargo ?>">Confirmar eliminación</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -97,11 +83,11 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
       </div>
 
       <div class="modal-footer">
-        <form method="POST" action="">
+    
           <input type="hidden" name="eliminar_id" value="<?= $datos->id_cargo ?>">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <a href="empleado.php?id=<?= $datos->id_empleado ?>" class="btn btn-danger">Eliminar</a>
-        </form>
+          <a href="cargo.php?id=<?= $datos->id_cargo ?>" class="btn btn-danger">Eliminar</a>
+        
       </div>
 
     </div>
@@ -110,11 +96,11 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal<?= $datos->id_empleado ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal<?= $datos->id_cargo ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar cargo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -122,32 +108,20 @@ INNER JOIN cargo ON empleado.cargo = cargo.id_cargo ");
       <div class="modal-body">
         
       <form action="" method = "POST">
-            <div hidden class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="id" name="txtid" value = " <?= $datos->id_empleado ?>">
+      <div hidden class="fl-flex-label mb-4 px-2 col-12">
+                <input type="text" class="input input__text" placeholder="id" name="txtid" value = " <?= $datos->id_cargo ?>">
             </div>
+            
             <div class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="Nombre" name="txtnombre" value = " <?= $datos->nombre ?>">
-            </div>
-            <div class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="Apellido" name="txtapellido" value = "<?= $datos->apellido ?>">
-            </div>
-            <div class="fl-flex-label mb-4 px-2 col-12">
-                <input type="text" class="input input__text" placeholder="Dni" name="txtdni" value = "<?= $datos->dni ?>">
-            </div>
-
-            <div class="fl-flex-label mb-4 px-2 col-12">
-            <select name="txtcargo" class="input input__select">
+            <select name="txtnombre" class="input input__select">
 <?php
     $sql2 = $conexion->query("SELECT * FROM cargo");
     while($datos2 = $sql2->fetch_object()){ 
         $selected = ($datos->id_cargo == $datos2->id_cargo) ? "selected" : "";
         ?>
-        <option value="<?= $datos2->id_cargo ?>" <?= $selected ?>><?= $datos2->nombre ?></option>
-
+        <option value="<?= $datos2->nombre ?>" <?= $selected ?>><?= $datos2->nombre ?></option>
     <?php } ?>
 </select>
-
-
 
             </div>
 

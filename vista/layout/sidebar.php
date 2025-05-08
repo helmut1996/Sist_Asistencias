@@ -16,6 +16,15 @@
                         <span class="lbl">EMPLEADOS</span>
                     </a>
                 </li>
+
+                <li class="red">
+                    <a href="cargo.php" class="activo">
+                        <img src="../public/img-inicio/team.png" class="img-inicio" alt="">
+                        <!-- <i class="fas fa-house-user"></i> -->
+                        <span class="lbl">CARGOS</span>
+                    </a>
+                </li>
+
                 <li class="red">
                     <a href="usuario.php" class="activo">
                         <img src="../public/img-inicio/programar.png" class="img-inicio" alt="">
