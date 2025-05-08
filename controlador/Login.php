@@ -9,6 +9,7 @@ if(!empty($_POST["btningresar"])){
        if($datos=$sql->fetch_object()){
         $_SESSION['nombre'] = $datos->nombre;
         $_SESSION['apellido'] = $datos->apellido;
+        $_SESSION['id'] = $datos->id_usuario;
            header("location:../inicio.php");
        }else{
            echo "<div class='alert alert-danger'>El Usuario no Existe</div>";
